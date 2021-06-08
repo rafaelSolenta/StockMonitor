@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<AssemblyName>Stock.Service.StockService</AssemblyName>
+		<RootNamespace>Stock.Service.StockService</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\Gateway\Contract\GatewayContract\GatewayContract.csproj" />
+	  <ProjectReference Include="..\..\..\Model\VO\VO.csproj\VO.csproj" />
+	  <ProjectReference Include="..\..\Contract\StockContract\StockContract.csproj" />
+	</ItemGroup>
+
+</Project>
