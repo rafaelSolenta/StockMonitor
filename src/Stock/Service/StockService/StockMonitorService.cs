@@ -13,14 +13,14 @@ namespace Stock.Service.StockService
     {
         private readonly IGatewayServiceProvider _gatewayServiceProvider;
 
-        public StockMonitorService(IGatewayServiceProvider gatewayServiceProvider)
+        public StockMonitorService(IGatewayServiceProvider gatewayServiceProvider) // CONSTRUTOR (SEM RETORNO) EX:PUBLIC XXX (){}SOMENTE
         {
             _gatewayServiceProvider = gatewayServiceProvider;
         }
 
         public async Task Monitor()
         {
-            // Do not run when Saturday and Sunday
+            // Do not run when Saturday and Sunday        // || "OU"
             if (DateTime.Now.DayOfWeek == DayOfWeek.Saturday || DateTime.Now.DayOfWeek == DayOfWeek.Sunday)
                 return;
 
@@ -29,7 +29,7 @@ namespace Stock.Service.StockService
             if (quotes is null || quotes.Count == 0)
                 return;
 
-            foreach (Quote quote in quotes)
+            foreach (Quote quote in quotes) //foreach - apenas p/ lista 
             {
                 string url = $"https://finance.yahoo.com/quote/{quote.TickUrl}?p={quote.TickUrl}";
                 HtmlDocument htmlDocument = await stockHtmlAgilityPackService.GetDocument(url);
@@ -42,6 +42,7 @@ namespace Stock.Service.StockService
 
                 nodes = await stockHtmlAgilityPackService.GetNodes(htmlDocument, "/html/body/div[1]/div/div/div[1]/div/div[2]/div/div/div[5]/div/div/div/div[2]/div[1]/div[1]/h1");
                 quote.CompanyName = nodes[0].InnerText;
+                // "xpath  Yahoo finanças"   / html / body / div[1] / div / div / div[1] / div / div[2] / div / div / div[5] / div / div / div / div[3] / div[1] / div / span[1]
             }
         }
     }
